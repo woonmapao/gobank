@@ -188,7 +188,7 @@ func withJWTAuth(handlerFunc http.HandlerFunc, s Storage) http.HandlerFunc {
 		}
 
 		claims := token.Claims.(jwt.MapClaims)
-		if account.Number != claims["accountNumber"] {
+		if account.Number != int64(claims["accountNumber"].(float64)) {
 			permissionDenied(w)
 			return
 		}
